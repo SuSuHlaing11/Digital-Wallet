@@ -1,0 +1,558 @@
+/* import fonts from fonts.css file */
+@import url(./fonts.css);
+
+/* css variables */
+@import url(./partials/_variables.css);
+
+/* import global styling */
+@import url(./partials/_global.css);
+
+/* homepage background  */
+.homebg {
+  background: rgb(10,0,36);
+background: linear-gradient(135deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+  
+}
+/* start navigation */
+.header_area .main-menu .navbar .navbar-brand {
+  padding: 0 2rem 0 5rem;
+}
+
+.header_area .main-menu .navbar {
+  padding: 1rem 20rem;
+}
+
+.header_area .main-menu .nav-item .nav-link {
+  font: normal 500 15px/2px;
+  text-transform: uppercase;
+  padding: 1.7rem;
+  color: var(--title-color);
+}
+
+.header_area .main-menu .navbar-nav .active a {
+  background: var(--gradient-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header_area .main-menu .navbar-nav a:hover {
+  background: var(--gradient-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* end navigation */
+
+/* Banner Area */
+
+.site-main .site-banner {
+  background: rgb(10,0,36);
+background: linear-gradient(135deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+  }
+
+.site-main .site-banner .site-title {
+  padding-top: 10%;
+  padding-left:40px;
+  font-weight: 500;
+}
+
+/* .site-main .site-banner .site-title h3::after {
+  content: " ";
+  height: 2px;
+  width: 18vw;
+  background: rgb(255, 255, 255);
+  display: inline-block;
+  margin-left: 5%;
+  transform: translateY(-10px);
+} */
+
+.site-main .site-banner .site-title h1 {
+  font-size: 5rem;
+}
+
+.site-main .site-banner .site-title h4 {
+  font-size: 1.5rem;
+}
+
+.banner-image{
+	position: relative; /* Keep it positioned correctly */
+    padding-top: 180px; /* Maintain your existing spacing */
+    z-index: 2; 
+}
+
+.site-main .site-banner .banner-image::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Center the gradient */
+    width: 550px; /* Larger size for better coverage */
+    height: 550px;
+    background: radial-gradient(circle, rgba(156, 13, 238, 0.7) 10%, transparent 50%); /* New cool-tone purple gradient */
+    transform: translate(-50%, -50%); /* Centering */
+    border-radius: 50%;
+    z-index: -1; /* Keeps it behind the image */
+}
+
+
+.site-main .site-banner .banner-image > img {
+  width:500px;
+  height:auto;
+  margin-left:120px;
+  
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+        
+    }
+    50% {
+        transform: translateY(-10px);
+        
+    }
+    100% {
+        transform: translateY(0);
+        
+    }
+}
+
+.banner-image img {
+    animation: floating 3s ease-in-out infinite;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* End Banner Area */
+
+/* Start About Area */
+
+.site-main .about-area {
+  padding: 8rem 5rem;
+}
+
+.site-main .about-area .about-title h2 > span {
+  display: block;
+  font: normal bold 49px/ 60px;
+  letter-spacing: 21px;
+}
+
+.site-main .about-area .about-title .paragraph > p {
+  padding: 0.4rem 0;
+}
+
+.site-main .faq {
+  padding: 8rem 5rem;
+}
+
+/* End About Area */
+
+/* Start Brand Area */
+
+.site-main .brand-area {
+  padding: 1rem 20rem;
+  margin-bottom: 4rem;
+}
+
+.site-main .brand-area .first-row .col-lg-4 {
+  display: flex;
+  justify-content: center;
+}
+
+.site-main .brand-area .first-row .col-lg-4 > .single-brand {
+  border: 1px solid var(--border-color);
+  text-align: center;
+  padding: 1.8rem 0rem;
+  margin: 0.9rem 0;
+  width: 180px;
+  height: 100px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.site-main .brand-area .first-row .col-lg-4 > .single-brand > img {
+  width: 50%;
+}
+
+.site-main .brand-area .first-row .col-lg-4 > .single-brand:hover {
+  box-shadow: var(--box-shadow);
+  transform: scale(1.1);
+}
+
+.site-main .brand-area .first-row .col-lg-4 > .single-brand:hover > img {
+  filter: brightness(0.15);
+}
+
+.site-main .brand-area .experience-area {
+  padding-left: 1rem;
+}
+
+.site-main .brand-area .experience-area span {
+  display: block;
+}
+
+.site-main .brand-area .experience-area .years-area {
+  background: url(../img/client-info-bg.png) no-repeat 45px 20px;
+  padding: 2rem 0;
+  width: 40rem;
+  height: 18rem;
+  padding-left: 8rem;
+  position: relative;
+}
+
+.site-main .brand-area .experience-area .bg-panel {
+  position: absolute;
+  left: -190px;
+  top: 0%;
+  background: #e029290a;
+  width: 400px;
+  height: 400px;
+  margin-left: 340px;
+  z-index: -1;
+}
+
+.site-main .brand-area .experience-area .years-area .years {
+  font: normal bold 84px/40px;
+  color: var(--primary-color2);
+  z-index: 2;
+}
+
+.site-main .brand-area .experience-area .years-area h2 > span {
+  font: normal 600 22px/30px;
+}
+
+.site-main .brand-area .experience-area .call-area {
+  padding-left: 10rem;
+}
+
+/* End Brand Area */
+
+/* Services Area */
+
+.site-main .services-area {
+  background: rgb(10,0,36);
+	background: linear-gradient(45deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+
+}
+
+.site-main .services-area .services-title {
+  padding: 0 14rem;
+}
+
+.site-main .services-area .services-title h1 {
+  font-size: 35px;
+}
+
+.site-main > .services-area .services {
+  backdrop-filter: blur(4px) saturate(117%);
+  -webkit-backdrop-filter: blur(4px) saturate(117%);
+  background-color: rgba(172, 145, 240, 0.51);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 2rem 0;
+  width: 16rem;
+  margin: 5rem 0.5rem;
+  transition: box-shadow 0.7s ease;
+  color: aliceblue;
+}
+
+.site-main > .services-area .services:hover {
+  box-shadow: var(--box-shadow);
+}
+
+/* End Services Area */
+
+/* Project Area */
+
+.site-main .project-area {
+  padding: 4rem 0;
+}
+
+.site-main .project-area .button-group button {
+  background: transparent;
+  border: none;
+  font: normal 500 16px/130px;
+  text-transform: uppercase;
+}
+
+.site-main .project-area .button-group button + button {
+  padding-left: 3rem;
+}
+
+.site-main .project-area .grid .our-project > .title h4 {
+  font: normal 700 25px/12px;
+}
+
+.site-main .project-area .grid .our-project .img a:hover img {
+  filter: brightness(1.1) drop-shadow(1px 8px 30px #b1afaf);
+}
+
+/* End Project Area */
+
+/* About Me */
+.about-area {
+  background: rgb(10,0,36);
+background: linear-gradient(135deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+}
+
+.site-main .about-area .about-title p {
+  padding: 2rem 7rem;
+}
+
+.site-main .about-area .client {
+  
+  box-shadow: 5px 5px 5px 5px rgba(118, 85, 225, 0.4);
+  margin: 3rem;
+}
+
+.site-main .about-area .client .client-img {
+  padding: 2rem;
+}
+
+.site-main .about-area .client .about-client {
+  padding-top: 2rem;
+}
+
+.site-main .about-area .client .about-client h4 {
+  font: normal 500 21px/ 20px;
+}
+
+.site-main .about-area .client .about-client p {
+  font-size: 14px;
+}
+
+.site-main .about-area .owl-carousel .owl-item {
+  display: flex;
+  justify-content: center;
+  padding: 0 1.5rem;
+  border-radius: 10px;
+}
+
+.site-main .about-area .owl-carousel .owl-dots .owl-dot.active span {
+  background: rgba(118, 85, 225, 0.6);
+  width: 12px;
+  height: 12px;
+}
+
+/* End About Me */
+
+/* Support  */
+/* .support-area accordion-container {
+  background: linear-gradient(135deg, #e27d7d, #781212);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */
+/* Centered Accordion */
+.support-area {
+	padding: 8rem 5rem;
+  background: rgb(10,0,36);
+background: linear-gradient(45deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+
+}
+.accordion-container {
+  width: 60%;
+  max-width: 500px;
+  backdrop-filter: blur(4px) saturate(117%);
+  -webkit-backdrop-filter: blur(4px) saturate(117%);
+  background-color: rgba(172, 145, 240, 0.51);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.accordion-item {
+  background: none;
+  border: none;
+}
+/* Accordion Item Styling */
+.accordion-item {
+  background: none;
+  border: none;
+  margin-bottom: 10px; /* Space between accordion items */
+}
+
+/* Accordion Button Styling */
+.accordion-button {
+  background-color: rgba(240, 145, 227, 0.193);
+  color: white !important;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* When accordion is expanded */
+.accordion-button:not(.collapsed) {
+  background:rgba(118, 85, 225, 0.6);
+  background: linear-gradient(
+    180deg,
+   	rgba(118, 85, 225, 0.6) 5%,
+    rgba(0, 0, 0, 0.334) 9%
+  );
+  color: white !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.152); /* Add border when clicked */
+  box-shadow: 0 2px 5px rgba(111, 25, 198, 0.2); /* Add a soft shadow */
+}
+
+/* Accordion Body Styling */
+.accordion-header {
+  background: rgba(205, 47, 222, 0.304);
+}
+.accordion-body {
+  background:rgba(118, 85, 225, 0.6);
+  background: linear-gradient(
+    0deg,
+   	rgba(118, 85, 225, 0.6) 5%,
+    rgba(0, 0, 0, 0.334) 9%
+  );
+  color: white;
+  padding: 20px;
+  /* border-radius: 5px; */
+  border-top: 1px solid #66666653; /* Add a top border for separation */
+  }
+
+/* Add some spacing between items when collapsed */
+.accordion-collapse {
+  margin-top: 5px;
+}
+
+/* Ensure the accordion button icon is visible and changes to minus when expanded */
+.accordion-button::after {
+  content: "\f067"; /* Plus icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color:#6603ad;
+  transition: transform 0.3s ease;
+}
+.accordion-button:not(.collapsed)::after {
+  content: "\f068"; /* Minus icon */
+}
+
+/* End Support  */
+
+/* Subscribe me */
+
+/* .site-main .subscribe-us-area .subscribe {
+  background: url(../img/subscribe-bg.png) no-repeat;
+  padding: 10rem 0;
+  margin: 3rem auto;
+} */
+
+.contact-area {
+  	background: rgb(10,0,36);
+	background: linear-gradient(135deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+
+}
+
+.contact-container {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  color: whitesmoke;
+  padding: 6rem 0;
+  /* margin: 3rem auto; */
+}
+.contact-info {
+  display: flex;
+  justify-content: space-around;
+}
+.contact-info div {
+  text-align: center;
+}
+.contact-info i {
+  font-size: 30px;
+  background-image: linear-gradient(135deg, #ffffff, #9454f1, #9454f1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block; /* Needed for proper gradient application */
+}
+.form-control {
+  background-color: #121212;
+  color: white;
+  border: 1px solid #c49b5a;
+}
+.form-control::placeholder {
+  color: gray;
+}
+.btn-custom {
+  background-color: #c49b5a;
+  color: black;
+  border: none;
+}
+.btn-custom:hover {
+  background-color: #b3874e;
+}
+
+/* End subscribe me */
+
+/* Footer Area */
+
+footer.footer-area {
+	padding: 8rem 8rem;
+  background: rgb(10,0,36);
+	background: linear-gradient(45deg, rgba(10,0,36,1) 0%, rgba(0,0,14,1) 50%, rgba(45,5,102,0.9922093837535014) 100%, rgba(38,1,117,1) 100%, rgba(52,1,145,1) 100%);
+	
+}
+
+footer.footer-area .social h5 {
+  font: normal 500 23px/ 30px;
+}
+
+footer.footer-area .social a > i {
+  font-size: 22px;
+  padding: 2rem;
+  color: var(--border-color);
+}
+
+footer.footer-area .social a:hover > i {
+  color: var(--primary-color);
+}
+
+/* End Footer */
+
+/* Glass Effect  */
+.glass-effect {
+  backdrop-filter: blur(4px) saturate(117%);
+  -webkit-backdrop-filter: blur(4px) saturate(117%);
+  background-color: rgba(172, 145, 240, 0.51);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Transparent input  */
+.transparent-input {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: light border */
+}
+
+.transparent-input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Makes placeholder semi-transparent */
+}
+
+.transparent-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.8); /* Change border color on focus */
+  box-shadow: none; /* Remove Bootstrap default focus shadow */
+}
+
+/* Footer icon  */
+.footercon {
+  font-size: 30px;
+  background-image: linear-gradient(135deg, #ffffff, #9454f1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block; /* Needed for proper gradient application */
+}
+
+.footercon:hover i{
+	background-image: linear-gradient(135deg, #9454f1, #ffffff) !important;
+  background-clip: text;
+  -webkit-background-clip: text;
+}

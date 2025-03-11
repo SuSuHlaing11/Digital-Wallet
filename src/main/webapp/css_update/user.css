@@ -1,0 +1,166 @@
+
+
+	.input,
+    .form-control,
+    .bg-glass {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+      overflow: hidden; /* Ensures pseudo-element stays inside */
+      color: white !important; 
+    }
+
+    /* Gradient Layer for Glass Effect */
+    
+    .bg-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 3, 200, 0.3), rgba(106, 0, 255, 0.3), rgba(61, 138, 253, 0.3)); 
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0.8; 
+    }
+     
+     .bg-glass3 {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white !important;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+    }
+
+    /* Gradient Layer for Glass Effect */
+    .bg-glass3::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(315deg, #0a0024 , #9454f1 );
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0.8; 
+      color: white;
+    }
+    #hover-link:hover{
+    background: none;
+    background-image: linear-gradient(135deg, #7f04fb, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+	#home-hover:hover{
+    background: none;
+    background-image: linear-gradient(135deg, #333, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+	#hover-text {
+    background: none;
+    background-image: linear-gradient(135deg, #ffffff, #9454f1, #9454f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+	#hover-text2 {
+    background: none;
+    background-image: linear-gradient(135deg, #ffffff, #dbeafe);
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#glass-card {
+  position: relative;
+  background: transparent; /* Allow blur effect to show */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Layer */
+#glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff03c8, #6a00ff, #3d8afd);
+  opacity: 0.4; /* Adjust opacity to make it translucent */
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.glass_card {
+  position: relative;
+  background: transparent; /* Allows blur effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  overflow: hidden; /* Ensures pseudo-element stays inside */
+}
+
+/* Gradient Layer */
+.glass_card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 3, 200, 0.3), rgba(106, 0, 255, 0.3), rgba(61, 138, 253, 0.3)); 
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.6; 
+}
+
+	.input,
+    .form-control{
+      position: relative;
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+      overflow: hidden; /* Ensures pseudo-element stays inside */
+      
+    }
+    
+    .bg-transparent {
+	background-color: transparent !important;
+}   
+    .transparent-input {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: light border */
+}
+
+.transparent-input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Makes placeholder semi-transparent */
+}
+
+.transparent-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.8); /* Change border color on focus */
+  box-shadow: none; /* Remove Bootstrap default focus shadow */
+}
+	::placeholder {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Input text and dropdown text color */
+.form-control:focus, select:focus, textarea:focus {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-color: #6603ad !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+	.form-check-input:checked {
+    background-color: #6603ad !important;
+    border-color: #6603ad !important;
+}
+    

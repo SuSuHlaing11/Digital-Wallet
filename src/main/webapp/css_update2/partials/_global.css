@@ -1,0 +1,183 @@
+/* Global Classes */
+.title-text {
+  font: normal bold 50px/ 72px;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+/* Buttons */
+
+.button {
+  padding: 0.8rem 2.2rem;
+  font: normal 500 16px/20px;
+  position: relative;
+  border: 3px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-hover {
+  background: rgba(255, 255, 255, 0.2); /* Transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px; /* Smooth edges */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 5px 5px 15px rgba(148, 84, 241, 0.4); /* Soft glow */
+}
+
+.btn-hover:hover {
+  background: linear-gradient(135deg, #9454f1, #ffffff); /* Reverse gradient effect */
+  background-clip: padding-box;
+  color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 20px 5px rgba(148, 84, 241, 0.6); /* More intense glow */
+  transition: all 0.3s ease-in-out;
+}
+
+.button.primary-button::after,
+.button.secondary-button::after {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  right: -2px;
+  background: var(--gradient-color);
+  content: " ";
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.button.secondary-button {
+  background: rgb(0, 0, 0);
+  background-clip: padding-box;
+  transition: background 0.6s ease;
+  color: var(--primary-color);
+}
+
+.button.secondary-button:hover {
+  background: var(--gradient-color);
+  color: rgb(0, 0, 0);
+  box-shadow: var(--box-shadow);
+}
+
+p.para {
+  color: var(--text-color);
+  font: normal 500 16px/ 25px;
+}
+
+button:focus,
+button:active button:hover .btn:active,
+.btn.active {
+  outline: 0px !important;
+  box-shadow: none !important;
+}
+
+.title-h1 {
+  font: normal bold 39px/ 40px;
+}
+
+.navbar_fixed {
+  position: fixed;
+  width: 100%;
+  top: -1px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: var(--box-shadow);
+  z-index: 999;
+  transition: background 1s ease;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+  
+}
+
+.sevices-img img {
+  width: 100%;  /* Make image fit the width of the container */
+  height: 100px; /* Adjust height as needed */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-radius: 5px;
+  
+}
+
+.align {
+	text-align: justify; 
+	padding-right:10px;
+}
+
+ 	.bg-glass2 {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color:white;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+      overflow: hidden; /* Ensures pseudo-element stays inside */
+    }
+
+    /* Gradient Layer for Glass Effect */
+    .bg-glass2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0024, #9454f1);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0.8; 
+      color: white;
+    }
+    
+    /* Navbar Glass Effect */
+    .blur {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    }
+    
+    .bg-glass:hover {
+	  background: linear-gradient(135deg, #9454f1, #ffffff); /* Reverse gradient effect */
+	  background-clip: padding-box;
+	  color: rgb(255, 255, 255);
+	  box-shadow: 5px 5px 20px 5px rgba(148, 84, 241, 0.6); /* More intense glow */
+	  transition: all 0.3s ease-in-out;
+	}
+	
+	.input,
+    .form-control{
+      position: relative;
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+      overflow: hidden; /* Ensures pseudo-element stays inside */
+      
+    }
+	::placeholder {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Input text and dropdown text color */
+.form-control:focus, select:focus, textarea:focus {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-color: #6603ad !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+	.form-check-input:checked {
+    background-color: #6603ad !important;
+    border-color: #6603ad !important;
+}
+    

@@ -21,7 +21,7 @@ Before setting up the project, ensure you have the following installed:
   [Download Tomcat 9](https://tomcat.apache.org/download-90.cgi)
 
 - **Eclipse IDE for Enterprise Java Developers**  
-  [Download Eclipse](https://www.eclipse.org/downloads/packages/release/latest/jee)
+  [Download Eclipse](https://www.eclipse.org/downloads/packages/release/2018-12/r/eclipse-ide-enterprise-java-developers)
 
 ## Database Setup
 

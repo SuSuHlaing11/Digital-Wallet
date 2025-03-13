@@ -26,7 +26,7 @@ Before setting up the project, ensure you have the following installed:
 ## Database Setup
 
 1. Start MySQL Server.
-2. Open MySQL Workbench or any MySQL client and import the database file:
+2. Open MySQL Workbench or any MySQL client and import the database file:  
    `sql_file/bank.sql`
 3. Default password for User accounts:
    ```html
@@ -48,6 +48,24 @@ Before setting up the project, ensure you have the following installed:
    - Go to **Window** → **Preferences** → **Server** → **Runtime Environments**.
    - Click **Add** and select **Apache Tomcat 9**.
    - Browse to the Tomcat installation directory and click **Finish**.
+
+## Email Configuration Update
+
+To enable email functionality, update the following files with the correct email configuration:
+
+- `usermodel.java`
+- `depositapprovalservlet.java`
+- `alertmodel.java`
+
+Update the following code snippet with your gmail in the respective files:
+
+```java
+final String from = "sender@gmail.com";
+final String smtpUser = "smtpAuthentication@gmail.com";
+final String smtpPass = "app password";
+```
+
+Ensure that the correct email credentials are used for successful email delivery.
 
 ## Build the Project
 

@@ -1,6 +1,8 @@
 package com.bank.controller;
 
 import java.io.IOException;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.sql.*;
 import java.util.Properties;
 import javax.mail.*;
@@ -19,7 +21,8 @@ import com.bank.database.DatabaseConnection;
 public class DepositApproveServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String idParam = request.getParameter("id");
         if (idParam == null || idParam.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Deposit ID is missing");
@@ -37,7 +40,7 @@ public class DepositApproveServlet extends HttpServlet {
         String action = request.getParameter("action");
         if ("approve".equals(request.getParameter("action"))) {
             System.out.println("DEBUG: Approving deposit with ID " + depositId);
-            boolean success = approveDeposit(depositId);  // Already updates balance before deleting
+            boolean success = approveDeposit(depositId); // Already updates balance before deleting
 
             if (success) {
                 response.setContentType("text/plain");
@@ -47,20 +50,18 @@ public class DepositApproveServlet extends HttpServlet {
             }
         }
 
-
         else if ("reject".equals(request.getParameter("action"))) {
             System.out.println("DEBUG: Rejecting deposit with ID " + depositId);
             boolean success = rejectDeposit(depositId);
 
             if (success) {
                 response.setContentType("text/plain");
-                response.getWriter().write("rejected");  // ✅ Send response to AJAX
+                response.getWriter().write("rejected"); // ✅ Send response to AJAX
             } else {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Rejection failed.");
             }
         }
 
-        
         else if ("undo".equals(action)) {
             System.out.println("DEBUG: Undoing rejection for deposit ID " + depositId);
             boolean success = undoRejectDeposit(depositId);
@@ -72,9 +73,10 @@ public class DepositApproveServlet extends HttpServlet {
             }
         }
     }
+
     public boolean approveDeposit(int depositId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);  // ✅ Start transaction
+            conn.setAutoCommit(false); // ✅ Start transaction
 
             // ✅ Step 1: Fetch approved deposit details
             String selectQuery = "SELECT d.receiver_id, d.amount, d.transfer_type, d.transfer_time, u.email " +
@@ -120,14 +122,16 @@ public class DepositApproveServlet extends HttpServlet {
                 }
             }
 
-         // ✅ Step 3: Move to history table and retrieve transfer_id
-            String insertHistorySql = "INSERT INTO history (sender_id, receiver_id, amount, transfer_type, transfer_time, account_type) " +
-                                      "SELECT sender_id, receiver_id, amount, transfer_type, transfer_time, account_type " +
-                                      "FROM deposit_approve WHERE deposit_id = ?";
+            // ✅ Step 3: Move to history table and retrieve transfer_id
+            String insertHistorySql = "INSERT INTO history (sender_id, receiver_id, amount, transfer_type, transfer_time, account_type) "
+                    +
+                    "SELECT sender_id, receiver_id, amount, transfer_type, transfer_time, account_type " +
+                    "FROM deposit_approve WHERE deposit_id = ?";
 
-            int transferId = -1;  // Default in case of failure
+            int transferId = -1; // Default in case of failure
 
-            try (PreparedStatement insertStmt = conn.prepareStatement(insertHistorySql, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement insertStmt = conn.prepareStatement(insertHistorySql,
+                    Statement.RETURN_GENERATED_KEYS)) {
                 insertStmt.setInt(1, depositId);
                 int historyRows = insertStmt.executeUpdate();
 
@@ -140,14 +144,13 @@ public class DepositApproveServlet extends HttpServlet {
                 // ✅ Get the generated transfer_id
                 try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        transferId = generatedKeys.getInt(1);  // Retrieve the auto-generated transfer_id
+                        transferId = generatedKeys.getInt(1); // Retrieve the auto-generated transfer_id
                         System.out.println("DEBUG: Generated transfer_id = " + transferId);
                     } else {
                         System.out.println("ERROR: Failed to retrieve transfer_id.");
                     }
                 }
             }
-
 
             // ✅ Step 4: Delete from deposit_approve
             String deleteQuery = "DELETE FROM deposit_approve WHERE deposit_id = ?";
@@ -156,11 +159,11 @@ public class DepositApproveServlet extends HttpServlet {
                 int deletedRows = deleteStmt.executeUpdate();
 
                 if (deletedRows > 0) {
-                    conn.commit();  // ✅ Commit transaction
+                    conn.commit(); // ✅ Commit transaction
                     System.out.println("DEBUG: Deposit approved, moved to history, and balance updated.");
 
                     // ✅ Send approval email with approved deposit details
-                    if (email != null && transferId != -1) {  
+                    if (email != null && transferId != -1) {
                         sendApprovalEmail(email, accno, amount, transferType, transferTime, transferId);
                     } else {
                         System.out.println("WARNING: No valid email or transfer_id for deposit ID " + depositId);
@@ -179,12 +182,11 @@ public class DepositApproveServlet extends HttpServlet {
         }
     }
 
-
-
-    private void sendApprovalEmail(String email, int accno, double amount, String transferType, String transferTime, int transferId) {
-        final String from = "digitalwallet2025@gmail.com";
-        final String smtpUser = "hninshweyiwint2022@gmail.com";
-        final String smtpPass = "givw ovku mvla yjqe";
+    private void sendApprovalEmail(String email, int accno, double amount, String transferType, String transferTime,
+            int transferId) {
+        final String from = "sender@gmail.com";
+        final String smtpUser = "smtpAuthentication@gmail.com";
+        final String smtpPass = "app password";
         final String host = "smtp.gmail.com";
 
         Properties properties = new Properties();
@@ -211,15 +213,18 @@ public class DepositApproveServlet extends HttpServlet {
             String emailContent = "<html>" +
                     "<head>" +
                     "<style>" +
-                    "body { font-family: Arial, sans-serif; background-color: #f4f4f5; color: #333; padding: 20px; text-align: center; }" +
-                    ".container { max-width: 600px; margin: auto; background-color: #f4f4f5; padding: 20px; border-radius: 8px; }" +
+                    "body { font-family: Arial, sans-serif; background-color: #f4f4f5; color: #333; padding: 20px; text-align: center; }"
+                    +
+                    ".container { max-width: 600px; margin: auto; background-color: #f4f4f5; padding: 20px; border-radius: 8px; }"
+                    +
                     ".header { margin-bottom: 20px; }" +
                     ".header i { font-size: 48px; }" +
                     ".header h3 { color: #333; margin-top: 10px; }" +
                     ".amount { color: #333; font-weight: bold; font-size: 20px; margin-top: 10px; }" +
                     ".hr { border: 0; border-top: 1px solid #fff; margin: 20px 0; }" +
                     ".list-group { list-style-type: none; padding: 0; margin: 0; text-align: left; }" +
-                    ".list-group-item { padding: 10px; text-align: left; display: flex; justify-content: space-between; border-bottom: 1px solid #333; }" +
+                    ".list-group-item { padding: 10px; text-align: left; display: flex; justify-content: space-between; border-bottom: 1px solid #333; }"
+                    +
                     "</style>" +
                     "</head>" +
                     "<body>" +
@@ -235,12 +240,17 @@ public class DepositApproveServlet extends HttpServlet {
                     "<div class='row'>" +
                     "<div class='col-md-12'>" +
                     "<ul class='list-group mb-3'>" +
-                    "<li class='list-group-item' style='text-align: left; color: #333;'><strong>Receipt ID:</strong> <span style='text-align: right; flex-grow: 1;'> " + transferId + "</span></li>" +
-                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Transaction Type:</strong> <span style='text-align: right; flex-grow: 1;'> " + transferType + "</span></li>" +
-                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>My Account:</strong> <span style='text-align: right; flex-grow: 1;'> " + accno + "</span></li>" +
+                    "<li class='list-group-item' style='text-align: left; color: #333;'><strong>Receipt ID:</strong> <span style='text-align: right; flex-grow: 1;'> "
+                    + transferId + "</span></li>" +
+                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Transaction Type:</strong> <span style='text-align: right; flex-grow: 1;'> "
+                    + transferType + "</span></li>" +
+                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>My Account:</strong> <span style='text-align: right; flex-grow: 1;'> "
+                    + accno + "</span></li>" +
 
-                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Amount:</strong> <span style='text-align: right; flex-grow: 1;'> " + amount + " Ks</span></li>" +
-                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Date & Time:</strong> <span style='text-align: right; flex-grow: 1;'> " + transferTime + "</span></li>" +
+                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Amount:</strong> <span style='text-align: right; flex-grow: 1;'> "
+                    + amount + " Ks</span></li>" +
+                    "<li class='list-group-item' style='text-align: left; color: #333; '><strong>Date & Time:</strong> <span style='text-align: right; flex-grow: 1;'> "
+                    + transferTime + "</span></li>" +
                     "</ul>" +
                     "</div>" +
                     "</div>" +
@@ -281,14 +291,15 @@ public class DepositApproveServlet extends HttpServlet {
             return false;
         }
     }
+
     public boolean rejectDeposit(int depositId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             // ✅ Step 1: Fetch email & validate deposit ID
             String email = null;
             String fetchQuery = "SELECT u.email " +
-                                "FROM deposit_approve d " +
-                                "JOIN user u ON CAST(u.accno AS CHAR) = CAST(d.receiver_id AS CHAR) " +
-                                "WHERE d.deposit_id = ?";
+                    "FROM deposit_approve d " +
+                    "JOIN user u ON CAST(u.accno AS CHAR) = CAST(d.receiver_id AS CHAR) " +
+                    "WHERE d.deposit_id = ?";
 
             try (PreparedStatement fetchStmt = conn.prepareStatement(fetchQuery)) {
                 fetchStmt.setInt(1, depositId);
@@ -349,11 +360,11 @@ public class DepositApproveServlet extends HttpServlet {
             message.setSubject("Deposit Rejected - Digital Wallet");
 
             String emailContent = "<html><body>" +
-                "<h2>Your Deposit Request Was Rejected</h2>" +
-                "<p>Unfortunately, your deposit request has been rejected.</p>" +
-                "<p>If you have any questions, please contact support.</p>" +
-                "<p>Best Regards,<br>Digital Wallet Team</p>" +
-                "</body></html>";
+                    "<h2>Your Deposit Request Was Rejected</h2>" +
+                    "<p>Unfortunately, your deposit request has been rejected.</p>" +
+                    "<p>If you have any questions, please contact support.</p>" +
+                    "<p>Best Regards,<br>Digital Wallet Team</p>" +
+                    "</body></html>";
 
             message.setContent(emailContent, "text/html");
             Transport.send(message);

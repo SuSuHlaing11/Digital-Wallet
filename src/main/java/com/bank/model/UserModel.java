@@ -2,6 +2,9 @@ package com.bank.model;
 
 import java.sql.*;
 import com.bank.LanguageHelper;
+
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -19,10 +22,10 @@ import com.bank.controller.RegisterController;
 import com.bank.database.DatabaseConnection;
 
 public class UserModel {
-	
+
 	public String registerUser(String fullname, String username, String dob, String gender, String nrc, String address,
 			String email, String phone, String acctype, String password1, String rePassword, String lang) {
-		
+
 		if (!password1.equals(rePassword)) {
 			return LanguageHelper.getMessage("not_match", lang);
 		}
@@ -30,7 +33,7 @@ public class UserModel {
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			System.out.println("DEBUG: Database connection established");
 
-// Check if the user already has the allowed number of accounts
+			// Check if the user already has the allowed number of accounts
 			String checkUserQuery = "SELECT COUNT(*) AS count, GROUP_CONCAT(acctype) AS accts FROM user WHERE email = ?";
 
 			try (PreparedStatement stmt = conn.prepareStatement(checkUserQuery)) {
@@ -47,17 +50,18 @@ public class UserModel {
 
 						if (existingAccounts != null && existingAccounts.contains(acctype)) {
 							System.out.println("ERROR: Duplicate account type for email: " + email);
-							String translatedAccType = acctype.equalsIgnoreCase("Current Account") 
-								    ? LanguageHelper.getMessage("current_account", lang) 
-								    : LanguageHelper.getMessage("savings_account", lang);
+							String translatedAccType = acctype.equalsIgnoreCase("Current Account")
+									? LanguageHelper.getMessage("current_account", lang)
+									: LanguageHelper.getMessage("savings_account", lang);
 
-								return LanguageHelper.getMessage("duplicate_account_type", lang).replace("{acctype}", translatedAccType);
+							return LanguageHelper.getMessage("duplicate_account_type", lang).replace("{acctype}",
+									translatedAccType);
 						}
 					}
 				}
 			}
 
-// Generate unique account number
+			// Generate unique account number
 			int accountNo;
 			boolean isUnique;
 			SecureRandom rand = new SecureRandom();
@@ -75,10 +79,10 @@ public class UserModel {
 
 			System.out.println("DEBUG: Generated Account No: " + accountNo);
 
-// Hash password
+			// Hash password
 			String hashedPassword = hashPassword(password1);
 
-// Insert user into database with 'Pending' status
+			// Insert user into database with 'Pending' status
 			String insertQuery = "INSERT INTO user (accno, fullname, username, dob, gender, nrc, address, email, phone, password, acctype, status, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending', ?)";
 			try (PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
 				stmt.setInt(1, accountNo);
@@ -170,9 +174,9 @@ public class UserModel {
 	}
 
 	private void sendApprovalEmail(String email) {
-		final String from = "digitalwallet2025@gmail.com";
-		final String smtpUser = "hninshweyiwint2022@gmail.com";
-		final String smtpPass = "givw ovku mvla yjqe";
+		final String from = "sender@gmail.com";
+		final String smtpUser = "smtpAuthentication@gmail.com";
+		final String smtpPass = "app password";
 		final String host = "smtp.gmail.com";
 
 		Properties properties = new Properties();
@@ -292,4 +296,4 @@ public class UserModel {
 		}
 	}
 
-	}
+}
